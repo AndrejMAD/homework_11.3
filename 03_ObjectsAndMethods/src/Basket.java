@@ -5,6 +5,7 @@ public class Basket {
     private int totalPrice = 0;
     private int limit;
 
+    //
     public Basket() {
         increaseCount(1);
         items = "Список товаров:";
