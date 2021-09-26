@@ -5,13 +5,12 @@ public class Basket {
     private int totalPrice = 0;
     private int limit;
 
-    //
     public Basket() {
         increaseCount(1);
         items = "Список товаров:";
         this.limit = 1000000;
     }
-
+    ////
     public Basket(int limit) {
         this();
         this.limit = limit;
