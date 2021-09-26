@@ -10,7 +10,7 @@ public class Basket {
         items = "Список товаров:";
         this.limit = 1000000;
     }
-    ////ZXZXTUJTYJRT
+
     public Basket(int limit) {
         this();
         this.limit = limit;
