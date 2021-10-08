@@ -25,6 +25,10 @@ public class Main {
     String regex = "[^0-9]";
     String formatNumber = number.replaceAll(regex, "");
 
+    // Если number не содержит чисел
+    if (formatNumber.isEmpty()) {
+      return "";
+    }
     if (formatNumber.charAt(0) == '8') {
       formatNumber = "7" + formatNumber.substring(1, formatNumber.length());
     }
