@@ -16,10 +16,7 @@ public class CoolNumbers {
                 for (int c1 = 0; c1 < chars.length; c1++) {
                     for (int c2 = 0; c2 < chars.length; c2++) {
                         for (int c3 = 0; c3 < chars.length; c3++) {
-                            char ch1 = chars[c1];
-                            char ch2 = chars[c2];
-                            char ch3 = chars[c3];
-                            String coolNumber = ch1 + String.valueOf(n) + n + n + ch2 + ch3 + r;
+                            String coolNumber = chars[c1] + String.valueOf(n) + n + n + chars[c2] + chars[c3] + r;
                             coolNumbers.add(coolNumber);
                         }
                     }
@@ -41,10 +38,7 @@ public class CoolNumbers {
 
     public static boolean binarySearchInList(List<String> sortedList, String number) {
         int resultSearch = Collections.binarySearch(sortedList, number);
-        if (resultSearch != -1) {
-            return true;
-        }
-        return false;
+        return (resultSearch != -1) ? true : false;
     }
 
     public static boolean searchInHashSet(HashSet<String> hashSet, String number) {
