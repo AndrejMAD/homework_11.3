@@ -54,7 +54,7 @@ public class Main {
                 time = end - start;
                 System.out.println("БПоиск в TreeSet: номер " + isSearchStr + ", поиск занял " + time + "нс");
             }
-            System.out.println("");
+            System.out.println();
         }
     }
 }
