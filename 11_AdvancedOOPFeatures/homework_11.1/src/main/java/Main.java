@@ -20,43 +20,58 @@ public class Main {
         List<Employee> staff = Employee.loadStaffFromFile(STAFF_TXT);
         sortBySalaryAndAlphabet(staff);
 
-        Consumer<Employee> consumer = e -> System.out.println(e);
-        Consumer<Employee> consumerPrint = new ConsumerPrint();
-        Consumer<Employee> consumerMethod = System.out::println;
-
+        System.out.println("****************************************");
         staff.forEach(new Consumer<Employee>() {
             @Override
             public void accept(Employee employee) {
                 System.out.println(employee);
             }
         });
+        System.out.println("****************************************");
+        Consumer<Employee> consumerPrint = new ConsumerPrint();
         staff.forEach(consumerPrint);
+        System.out.println("****************************************");
+        Consumer<Employee> consumer = e -> System.out.println(e);
         staff.forEach(consumer);
-        staff.forEach(System.out::println);
-        staff.forEach(e -> System.out.println(e));
+        System.out.println("****************************************");
+        staff.forEach(System.out::println); //))))))))))))))))))))))))
+        System.out.println("****************************************");
+        staff.forEach(e -> System.out.println(e)); //)))))))))))))))))
+        System.out.println("****************************************");
+        Consumer<Employee> consumerMethod = System.out::println;
         for (Employee e : staff) {
             consumerMethod.accept(e);
         }
+        System.out.println("****************************************");
+        consumer = e -> System.out.println(e);
         for (Employee e : staff) {
             consumer.accept(e);
         }
+        System.out.println("****************************************");
+        consumerPrint = new ConsumerPrint();
         for (Employee e : staff) {
             consumerPrint.accept(e);
         }
+        System.out.println("****************************************");
         for (Employee e : staff) {
             System.out.println(e);
         }
+        System.out.println("****************************************");
         for (int i = 0; i < staff.size(); i++) {
             System.out.println(staff.get(i));
         }
+        System.out.println("****************************************");
     }
 
     public static void sortBySalaryAndAlphabet(List<Employee> staff) {
-        staff.sort((e1, e2) -> {
-            if (Integer.compare(e1.getSalary(), e2.getSalary()) == 0) {
-                return e1.getName().compareTo(e2.getName());
-            }
-            return Integer.compare(e1.getSalary(), e2.getSalary());
-        });
+        // Красота )))
+        staff.sort(Main::compareBySalaryAndAlphabet);
+    }
+    
+    public static int compareBySalaryAndAlphabet(Employee e1, Employee e2) {
+        if (Integer.compare(e1.getSalary(), e2.getSalary()) == 0) {
+            return e1.getName().compareTo(e2.getName());
+        }
+        return Integer.compare(e1.getSalary(), e2.getSalary());
     }
 }
