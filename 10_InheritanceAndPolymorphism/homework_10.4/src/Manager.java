@@ -1,4 +1,4 @@
-public class Manager extends AbstractEmployee {
+public class Manager extends AbstractEmployee implements Employee {
 
     private final double BONUS = 0.05;
     private final int sales;

@@ -1,4 +1,4 @@
-public class TopManager extends AbstractEmployee {
+public class TopManager extends AbstractEmployee implements Employee {
 
     private final double BONUS_FIX_SALARY = 1.5;
     private final int BONUS_MIN_INCOME = 10_000_000;
