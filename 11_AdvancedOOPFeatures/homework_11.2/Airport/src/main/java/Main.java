@@ -15,24 +15,19 @@ public class Main {
         Airport airport = Airport.getInstance();
         List<Flight> flights = findPlanesLeavingInTheNextTwoHours(airport);
 
-        for (Flight flight : flights) {
-            System.out.println(flight);
-        }
+        flights.stream().forEach(System.out::println);
     }
 
     public static List<Flight> findPlanesLeavingInTheNextTwoHours(Airport airport) {
         List<Flight> flights = new ArrayList<>();
-        Date now = new Date();
-        Date nowPlus2Hours = new Date(System.currentTimeMillis() + 2 * 3600000);
+        airport.getTerminals().stream().forEach(t -> flights.addAll(t.getFlights()));
 
-        List<Terminal> terminals = airport.getTerminals();
-        for (Terminal terminal : terminals) {
-            flights.addAll(terminal.getFlights());
-        }
+        Date now = new Date();
+        Date nextTwoHours = new Date(System.currentTimeMillis() + 2 * 3600000);
 
         Stream<Flight> stream = flights.stream()
                 .filter(f -> f.getType() == Flight.Type.DEPARTURE)
-                .filter(f -> f.getDate().after(now) && f.getDate().before(nowPlus2Hours));
+                .filter(f -> f.getDate().after(now) && f.getDate().before(nextTwoHours));
 
         return stream.collect(Collectors.toList());
     }
