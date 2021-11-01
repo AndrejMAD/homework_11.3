@@ -1,49 +1,39 @@
 import java.io.File;
-import java.util.Formatter;
 
 public class FileUtils {
 
     public static long calculateFolderSize(String path) {
-        long size = 0;
-
         try {
-            File folder = new File(path);
-            if (folder.isDirectory()) {
-                File[] files = folder.listFiles();
-                for (File file : files) {
-                    if (file.isDirectory()) {
-                        size += calculateFolderSize(file.getPath());
-                    } else if (file.isFile()) {
-                        size += file.length();
-                    }
-                }
+            File file = new File(path);
+
+            if (file.isFile()) {
+                return file.length();
             }
+
+            long size = 0;
+            File[] files = file.listFiles();
+            for (File f : files) {
+                size += calculateFolderSize(f.getPath());
+            }
+            return size;
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        return size;
+        return 0;
     }
 
     public static String bytesToReadableUnit(long size) {
-        final String format = "%.1f %s";
-        final String UNIT_BYTE = "байт";
-        final String UNIT_KB = "Кб";
-        final String UNIT_MB = "Мб";
-        final String UNIT_GB = "Гб";
-        final String UNIT_TB = "Еб";
+        final String FORMAT = "%.1f%s";
+        final double BYTE_ORDINAL = 1024.0;
+        final String UNITS = "BKMGT";
 
-        if (size < 1024) {
-            return String.format(format, (double) size, UNIT_BYTE);
-        } else if (size < 1024.0 * 1024.0) {
-            return String.format(format, size / 1024.0, UNIT_KB);
-        } else if (size < 1024.0 * 1024.0 * 1024.0) {
-            return String.format(format, size / (1024.0 * 1024.0), UNIT_MB);
-        } else if (size < 1024.0 * 1024.0 * 1024.0 * 1024.0) {
-            return String.format(format, size / (1024.0 * 1024.0 * 1024.0), UNIT_GB);
-        } else if (size < 1024.0 * 1024.0 * 1024.0 * 1024.0 * 1024.0) {
-            return String.format(format, size / (1024.0 * 1024.0 * 1024.0 * 1024.0), UNIT_TB);
+        for (int i = 1; i <= 5; i++) {
+            if (size < Math.pow(BYTE_ORDINAL, i)) {
+                double sizeResult = size / Math.pow(BYTE_ORDINAL, i - 1);
+                return String.format(FORMAT, sizeResult, UNITS.charAt(i - 1));
+            }
         }
-        return "Много";
+
+        return "";
     }
 }
